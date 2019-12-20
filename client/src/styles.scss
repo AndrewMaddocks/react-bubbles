@@ -97,3 +97,39 @@ form {
     margin-top: 16px;
   }
 }
+.outter-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+}
+.login-page {
+  border: 3px solid black;
+  width: 30%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 200px;
+  button {
+    color: white;
+    background-color: black;
+    width: 40%;
+    font-size: 18px;
+  }
+  input {
+    border: 2px solid black;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  h1 {
+    margin-bottom: -30px;
+  }
+}
+
+.color-link {
+  margin-top: 30px;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const initialColor = {
   color: "",
   code: { hex: "" }
@@ -10,6 +11,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [addColor, setAddColor] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -37,9 +39,35 @@ const ColorList = ({ colors, updateColors }) => {
       })
       .catch(err => console.log(err));
   };
+  const handleColor = e => {
+    setAddColor({ ...addColor, color: e.target.value });
+  };
+  const handlehex = e => {
+    setAddColor({ ...addColor, code: { hex: e.target.value } });
+  };
+  const addFriend = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/colors", addColor)
+      .then(res => updateColors(res.data))
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className="colors-wrap">
+      <div className="button-row">
+        <Link
+          style={{
+            textDecoration: "none",
+            color: "white",
+            backgroundColor: "black",
+            padding: "3px 10px"
+          }}
+          to="/login"
+        >
+          Login
+        </Link>
+      </div>
       <p>colors</p>
       <ul>
         {colors.map(color => (
@@ -93,8 +121,20 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
+      <form onSubmit={addFriend}>
+        <legend>add color</legend>
+        <label>
+          color name:
+          <input onChange={handleColor} value={addColor.color} />
+        </label>
+        <label>
+          hex code:
+          <input onChange={handlehex} value={addColor.code.hex} />
+        </label>
+        <div className="button-row">
+          <button type="submit">Add Color</button>
+        </div>
+      </form>
     </div>
   );
 };

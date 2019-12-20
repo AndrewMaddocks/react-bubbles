@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Login = props => {
@@ -28,22 +28,42 @@ const Login = props => {
   };
 
   return (
-    <div>
-      <form onSubmit={login}>
-        <input
-          type="text"
-          name="username"
-          value={credentials.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          value={credentials.password}
-          onChange={handleChange}
-        />
-        <button>Log in</button>
-      </form>
+    <div className="outter-login">
+      <div className="login-page">
+        <h1>LOGIN</h1>
+
+        <form onSubmit={login}>
+          <input
+            type="text"
+            name="username"
+            placeholder="Lambda School"
+            value={credentials.username}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="i<3Lambd4"
+            value={credentials.password}
+            onChange={handleChange}
+          />
+          <div>
+            <button>Log in</button>
+          </div>
+          <div className="color-link">
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "red",
+                fontSize: "14px"
+              }}
+              to="/bubble"
+            >
+              Already Signed In?
+            </Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
