@@ -15,7 +15,7 @@ function App() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/bubble">Protected Page</Link>
+            <Link to="/bubble">Colors Page</Link>
           </li>
         </ul>
         <Route exact path="/login" component={Login} />
